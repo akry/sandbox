@@ -1,0 +1,35 @@
+# backupstorage
+
+backupstorage add --uuid bkst-demo1 --display-name='local storage' --base-uri='file:///opt/axsh/wakame-vdc/images/' --storage-type=local --description='local backup storage under /opt/axsh/wakame-vdc/images/' --node-id="bksta.demo1"
+
+# network dc
+
+network dc add vnet --allow-new-networks true
+network dc add-network-mode vnet l2overlay
+network dc del-network-mode vnet passthrough
+
+# network (nw-*)
+
+network add  --uuid nw-manage  --ipv4-network 10.1.0.0  --ipv4-gw 10.1.0.1  --prefix 24  --domain vnet8.local  --metric 10  --service-type lb  --display-name "manage"  --ip-assignment "asc" --network-mode passthrough
+
+# network forwarding
+
+network forward nw-manage   management
+
+# network service
+
+network service dhcp nw-manage --ipv4=10.1.0.2
+
+
+# network dhcp ip address range
+
+network dhcp addrange nw-manage   10.1.0.10    10.1.0.240
+
+
+## should be deleted keypair dependency in LB/hva.conf.
+
+keypair add --account-id a-shpoolxx --uuid ssh-demo --private-key=/opt/axsh/wakame-vdc/tests/vdc.sh.d/pri.pem --public-key=/opt/axsh/wakame-vdc/tests/vdc.sh.d/pub.pem --description "demo key1" --service-type std --display-name "demo"
+
+# mac address range
+
+macrange add 525400 1 ffffff --uuid mr-demomacs

@@ -7,6 +7,8 @@ set -e
 set -o pipefail
 set -x
 
+whoami
+
 function yum() {
   $(type -P yum) --disablerepo=updates "${@}"
 }

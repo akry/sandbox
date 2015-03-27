@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+set -x
+
+initctl stop vnet-vna || :
+initctl stop vnet-vnmgr || :
+initctl stop vnet-webapi || :
+
+cd /opt/axsh/openvnet/vnet
+bundle exec rake db:drop
+bundle exec rake db:create
+bundle exec rake db:init
+
+initctl start vnet-vnmgr
+initctl start vnet-webapi
+
+for line `find /vdc_vnet_tools/vnet_demo -type f | sort | xargs cat | egrep -v '^#|^$'`; do
+  /opt/axsh/openvnet/vnctl/bin/vnctl ${line}
+done

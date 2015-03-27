@@ -10,6 +10,8 @@ System Requirements
 Getting Started
 ---------------
 
+copy RSA keyfiles to `guestroot/.ssh/` then
+
 ```
 $ vagrant up
 ```
