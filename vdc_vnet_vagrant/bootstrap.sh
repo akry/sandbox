@@ -16,6 +16,7 @@ function yum() {
 # Add installation packages ...
 addpkgs="
  gcc
+ gcc-c++
  make
  git
  vim
@@ -30,6 +31,7 @@ addpkgs="
  zeromq3-devel
  patch
  jemalloc
+ splite-devel
 "
 
 if [[ -n "$(echo ${addpkgs})" ]]; then
