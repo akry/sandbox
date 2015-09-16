@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
+require 'rspec_test'
+require 'sinatra'
+
+get '/hi' do
+  RspecTest.type
+end

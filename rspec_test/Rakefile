@@ -1,0 +1,16 @@
+# task :hello do
+#   p 'hello'
+# end
+# 
+# task :hello_world => [:hello] do
+#   p 'world'
+# end
+# 
+# task :all => [:hello, :hello]
+# 
+# task :echo, [:arg1, :arg2] => [:hello] do |task, args|
+#   p args
+# end
+
+task :test do
+end
